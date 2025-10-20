@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking System</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Bus Booking System</h1>
+        </header>
+
+        <main>
+            <div id="bookingOptions" class="booking-options">
+                <h2>Select Booking Type</h2>
+                <div class="option-buttons">
+                    <button id="manualBookingBtn" class="option-btn">Manual Booking</button>
+                    <button id="preloadedBookingBtn" class="option-btn">Preloaded Bus Booking</button>
+                    <button id="cancelBookingBtn" class="option-btn">Cancel Booking</button>
+                    <button id="adminPanelBtn" class="option-btn">Admin Panel</button>
+                    <button id="userProfileBtn" class="option-btn">User Profile</button>
+                </div>
+            </div>
+
+            <!-- Manual Booking Form -->
+            <div id="manualBookingForm" class="form-container hidden">
+                <h2>Manual Booking</h2>
+                <form id="manualForm">
+                    <div class="form-group">
+                        <label for="manualName">Name:</label>
+                        <input type="text" id="manualName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="manualSource">Source:</label>
+                        <input type="text" id="manualSource" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="manualDestination">Destination:</label>
+                        <input type="text" id="manualDestination" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="manualDate">Date of Journey (YYYY-MM-DD):</label>
+                        <input type="date" id="manualDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="manualPassengers">Number of Passengers:</label>
+                        <input type="number" id="manualPassengers" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="manualFare">Fare per Passenger:</label>
+                        <input type="number" id="manualFare" min="1" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Book Now</button>
+                        <button type="button" id="manualBackBtn" class="back-btn">Back</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Preloaded Bus Booking Form -->
+            <div id="preloadedBookingForm" class="form-container hidden">
+                <h2>Preloaded Bus Booking</h2>
+                <form id="preloadedForm">
+                    <div class="form-group">
+                        <label for="preloadedName">Name:</label>
+                        <input type="text" id="preloadedName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preloadedSource">Source:</label>
+                        <input type="text" id="preloadedSource" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preloadedDestination">Destination:</label>
+                        <input type="text" id="preloadedDestination" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preloadedDate">Date of Journey (YYYY-MM-DD):</label>
+                        <input type="date" id="preloadedDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="preloadedPassengers">Number of Passengers:</label>
+                        <input type="number" id="preloadedPassengers" min="1" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Search Buses</button>
+                        <button type="button" id="preloadedBackBtn" class="back-btn">Back</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Available Buses Section -->
+            <div id="availableBuses" class="hidden">
+                <h2>Available Buses</h2>
+                <div id="busesList"></div>
+                <button id="busesBackBtn" class="back-btn">Back to Search</button>
+            </div>
+
+            <!-- Seat Selection Section -->
+            <div id="seatSelection" class="hidden">
+                <h2>Select Your Seats</h2>
+                <div id="seatMap"></div>
+                <div class="seat-selection-actions">
+                    <button id="confirmBookingBtn" class="submit-btn">Confirm Booking</button>
+                    <button id="seatSelectionBackBtn" class="back-btn">Back to Buses</button>
+                </div>
+            </div>
+
+            <!-- Booking Confirmation -->
+            <div id="bookingConfirmation" class="confirmation hidden">
+                <h2>Booking Confirmed!</h2>
+                <div id="confirmationDetails"></div>
+                <button id="newBookingBtn" class="submit-btn">New Booking</button>
+            </div>
+
+            <!-- Cancellation Form -->
+            <div id="cancellationForm" class="form-container hidden">
+                <h2>Cancel Booking</h2>
+                <form id="cancelForm">
+                    <div class="form-group">
+                        <label for="bookingId">Booking ID:</label>
+                        <input type="number" id="bookingId" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Cancel Booking</button>
+                        <button type="button" id="cancelBackBtn" class="back-btn">Back</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Cancellation Confirmation -->
+            <div id="cancellationConfirmation" class="confirmation hidden">
+                <h2>Cancellation Confirmed</h2>
+                <div id="cancellationDetails"></div>
+                <button id="newCancellationBtn" class="submit-btn">New Action</button>
+            </div>
+
+            <!-- Admin Panel -->
+            <div id="adminPanel" class="hidden">
+                <h2>Admin Panel - All Bookings</h2>
+                <div id="adminBookingsList"></div>
+                <div class="form-actions">
+                    <button id="refreshBookingsBtn" class="submit-btn">Refresh</button>
+                    <button id="adminBackBtn" class="back-btn">Back</button>
+                </div>
+            </div>
+
+            <!-- User Profile Section -->
+            <div id="userProfile" class="form-container hidden">
+                <h2>User Profile</h2>
+                <form id="userProfileForm">
+                    <div class="form-group">
+                        <label for="username">Enter Username:</label>
+                        <input type="text" id="username" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Get Profile</button>
+                        <button type="button" id="userProfileBackBtn" class="back-btn">Back</button>
+                    </div>
+                </form>
+                <div id="userProfileDetails" class="hidden">
+                    <h3>Your Bookings</h3>
+                    <div id="userBookingsList"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Bus Booking System</p>
+        </footer>
+    </div>
+
+    <script src="scripts/script.js"></script>
+</body>
+</html>
